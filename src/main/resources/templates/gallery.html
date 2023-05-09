@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Gallery</title>
+</head>
+<body>
+
+<div th:insert="DashBoard.html"></div>
+
+<span th:each="imgname : ${imgList}">
+
+<img th:alt="${imgname}" th:src="@{'/images/'+${imgname}}" width="378" height="300">
+
+</span>
+
+</body>
+</html>
