@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class emailCotroller {
 
@@ -16,8 +18,13 @@ public class emailCotroller {
 	
 	
 	@GetMapping("/contact")
-	public String getEmail() {
+	public String getEmail(HttpSession session) {
 	
+if(session.getAttribute("owner")==null) {
+			
+			return "Login";
+		}
+		
 		return "contact";
 		
 	}

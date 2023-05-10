@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hms.model.Hostelers;
 import com.hms.repository.hostelersRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -22,9 +24,16 @@ public class hostelersController {
 	
 	
 	@GetMapping("/hostelersform")
-	public String formEntry()
+	public String formEntry(HttpSession session)
 	{
+		
+		if(session.getAttribute("owner")==null) {
+			
+			return "Login";
+		}
+		
 		return "HostelersForm";
+		
 	}
 	
 	@PostMapping("/hostelersform")
@@ -34,27 +43,53 @@ public class hostelersController {
 	}
 	
 	@GetMapping("/list")
-	public String getAllHos(Model model)
+	public String getAllHos(Model model,HttpSession session)
 	{
+		
+    if(session.getAttribute("owner")==null) {
+			
+			return "Login";
+		}
 		model.addAttribute("hosList",hostelersRepo.findAll());
 		return "Home";
 	}
 	
 	@GetMapping("/delete")
-	public String deleteHostelers(@RequestParam int id) {
+	public String deleteHostelers(@RequestParam int id,HttpSession session) {
+		
+		if(session.getAttribute("owner")==null) {
+			
+			return "Login";
+		}
+		
+		
 		hostelersRepo.deleteById(id);
 		return "redirect:list";
 	}
 	
 	@GetMapping("/edit")
-	public String editHostelers(@RequestParam int id,Model model)
+	public String editHostelers(@RequestParam int id,Model model,HttpSession session)
 	{
+		
+         if(session.getAttribute("owner")==null) {
+			
+			return "Login";
+		}
+		
 		model.addAttribute("hedit",hostelersRepo.findById(id));
 		return "EditForm";
 	}
 	
 	@PostMapping("/update")
-	public String updateHostelers(@ModelAttribute Hostelers hostel) {
+	public String updateHostelers(@ModelAttribute Hostelers hostel,HttpSession session) {
+		
+		if(session.getAttribute("owner")==null) {
+			
+			return "Login";
+		}
+		//model.addAttribute("hosList",hostelersRepo.findAll());
+		//return "Home";
+		
 		hostelersRepo.save(hostel);
 		return "redirect:list";
 	}

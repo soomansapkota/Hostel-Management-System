@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UploadController {
 
 	@GetMapping("/upload")
-	public String uploadimage()
+	public String uploadimage(HttpSession session)
 	{
-		
+     if(session.getAttribute("owner")==null) {
+			
+			return "Login";
+		}
 		return "Uploadform";
 		
 	}

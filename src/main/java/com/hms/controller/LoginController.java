@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.hms.model.Owner;
 import com.hms.repository.ownerRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
 	
@@ -25,7 +27,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String doLogin(@ModelAttribute Owner owner,Model model) {
+	public String doLogin(@ModelAttribute Owner owner,Model model,HttpSession session) {
 		
 		owner.setPassword(DigestUtils.md5DigestAsHex(owner.getPassword().getBytes()));
 		Owner own = ownerRepo.findByUsernameAndPassword(owner.getUsername(), owner.getPassword());
@@ -33,7 +35,10 @@ public class LoginController {
 		
 		if(own!= null) 
 		{
-		model.addAttribute("uname",owner.getUsername());
+			
+			session.setAttribute("owner", own);
+			session.setMaxInactiveInterval(120);
+		//model.addAttribute("uname",owner.getUsername());
 		
 		return "DashBoard";
 		}
@@ -44,8 +49,9 @@ public class LoginController {
 	}
 	
 	@GetMapping("/logout")
-	public String logoutForm() {
+	public String logoutForm(HttpSession session) {
 		
+		session.invalidate();		
 		return "Login";
 	}
 
