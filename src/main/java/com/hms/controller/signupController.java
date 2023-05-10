@@ -12,15 +12,15 @@ import com.hms.repository.ownerRepository;
 
 @Controller
 public class signupController {
-	
+
 	@Autowired
 	private ownerRepository ownerRepo;
-	
+
 	@GetMapping("/signup")
 	public String signupPage() {
 		return "Signup";
 	}
-	
+
 	@PostMapping("/signup")
 	public String saveOwner(@ModelAttribute Owner owner) {
 		owner.setPassword(DigestUtils.md5DigestAsHex(owner.getPassword().getBytes()));

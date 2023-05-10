@@ -8,5 +8,4 @@ import com.hms.model.Hostelers;
 @Repository
 public interface hostelersRepository extends JpaRepository<Hostelers, Integer> {
 
-	
 }

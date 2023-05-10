@@ -6,13 +6,12 @@
 </head>
 <body>
 
-<div th:insert="DashBoard.html"></div>
+	<div th:insert="DashBoard.html"></div>
 
-<span th:each="imgname : ${imgList}">
+	<span th:each="imgname : ${imgList}"> <img th:alt="${imgname}"
+		th:src="@{'/images/'+${imgname}}" width="378" height="300">
 
-<img th:alt="${imgname}" th:src="@{'/images/'+${imgname}}" width="378" height="300">
-
-</span>
+	</span>
 
 </body>
 </html>

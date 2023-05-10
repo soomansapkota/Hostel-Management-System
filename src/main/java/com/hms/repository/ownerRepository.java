@@ -4,7 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.hms.model.Owner;
+
 @Repository
-public interface ownerRepository extends JpaRepository<Owner, Integer>{
-		Owner findByUsernameAndPassword(String un,String psw);
-		}
+public interface ownerRepository extends JpaRepository<Owner, Integer> {
+	Owner findByUsernameAndPassword(String un, String psw);
+}

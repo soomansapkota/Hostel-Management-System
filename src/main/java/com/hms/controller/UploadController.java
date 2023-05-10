@@ -17,34 +17,32 @@ import jakarta.servlet.http.HttpSession;
 public class UploadController {
 
 	@GetMapping("/upload")
-	public String uploadimage(HttpSession session)
-	{
-     if(session.getAttribute("owner")==null) {
-			
+	public String uploadimage(HttpSession session) {
+		if (session.getAttribute("owner") == null) {
+
 			return "Login";
 		}
 		return "Uploadform";
-		
+
 	}
-	
+
 	@PostMapping("/upload")
-	public String saveImage(@RequestParam("file") MultipartFile file ,Model model) throws IOException
-	{
-		
-		if(!file.isEmpty()) {
-			
-			FileOutputStream fout = new FileOutputStream("src/main/resources/static/images/"+ file.getOriginalFilename());
-				fout.write(file.getBytes());
-				fout.close();
-			
+	public String saveImage(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+
+		if (!file.isEmpty()) {
+
+			FileOutputStream fout = new FileOutputStream(
+					"src/main/resources/static/images/" + file.getOriginalFilename());
+			fout.write(file.getBytes());
+			fout.close();
+
 			model.addAttribute("message", "Upload Success");
 			return "Uploadform";
 		}
 		model.addAttribute("message", "Upload Failed");
-		
+
 		return "Uploadform";
-		
+
 	}
-	
-	
+
 }

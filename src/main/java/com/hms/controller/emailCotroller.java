@@ -14,52 +14,38 @@ import jakarta.servlet.http.HttpSession;
 public class emailCotroller {
 
 	@Autowired
-    private JavaMailSender javaMailSender;
-	
-	
+	private JavaMailSender javaMailSender;
+
 	@GetMapping("/contact")
 	public String getEmail(HttpSession session) {
-	
-if(session.getAttribute("owner")==null) {
-			
+
+		if (session.getAttribute("owner") == null) {
+
 			return "Login";
 		}
-		
+
 		return "contact";
-		
+
 	}
-	
-	
+
 	@PostMapping("/contact")
-	public String postEmail(@RequestParam String toEmail,@RequestParam String subject, @RequestParam String Message)
-	{
-		
-		sendEmail(toEmail,subject,Message);
-		
+	public String postEmail(@RequestParam String toEmail, @RequestParam String subject, @RequestParam String Message) {
+
+		sendEmail(toEmail, subject, Message);
+
 		return "contact";
-		
-		
-		
-		 
 
-	       
 	}
-
 
 	private void sendEmail(String toEmail, String subject, String Message) {
-		
-		 SimpleMailMessage msg = new SimpleMailMessage();
-	        msg.setTo(toEmail);
 
-	        msg.setSubject(subject);
-	        msg.setText(Message);
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo(toEmail);
 
-	        javaMailSender.send(msg);
-	}
-		
-	        
+		msg.setSubject(subject);
+		msg.setText(Message);
+
+		javaMailSender.send(msg);
 	}
 
-
-	
-
+}

@@ -15,43 +15,41 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
-	
+
 	@Autowired
 	private ownerRepository ownerRepo;
-	
+
 	@GetMapping("/login")
 	public String loginPage() {
-		
+
 		return "Login";
-		
+
 	}
-	
+
 	@PostMapping("/login")
-	public String doLogin(@ModelAttribute Owner owner,Model model,HttpSession session) {
-		
+	public String doLogin(@ModelAttribute Owner owner, Model model, HttpSession session) {
+
 		owner.setPassword(DigestUtils.md5DigestAsHex(owner.getPassword().getBytes()));
 		Owner own = ownerRepo.findByUsernameAndPassword(owner.getUsername(), owner.getPassword());
-		
-		
-		if(own!= null) 
-		{
-			
+
+		if (own != null) {
+
 			session.setAttribute("owner", own);
 			session.setMaxInactiveInterval(120);
-		//model.addAttribute("uname",owner.getUsername());
-		
-		return "DashBoard";
+			// model.addAttribute("uname",owner.getUsername());
+
+			return "DashBoard";
 		}
-		
-		model.addAttribute("message","User Not Found");
-		
+
+		model.addAttribute("message", "User Not Found");
+
 		return "Login";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logoutForm(HttpSession session) {
-		
-		session.invalidate();		
+
+		session.invalidate();
 		return "Login";
 	}
 

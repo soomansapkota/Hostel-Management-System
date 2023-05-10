@@ -14,84 +14,77 @@ import com.hms.repository.hostelersRepository;
 
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
 public class hostelersController {
 
 	@Autowired
 	private hostelersRepository hostelersRepo;
-	
-	
+
 	@GetMapping("/hostelersform")
-	public String formEntry(HttpSession session)
-	{
-		
-		if(session.getAttribute("owner")==null) {
-			
+	public String formEntry(HttpSession session) {
+
+		if (session.getAttribute("owner") == null) {
+
 			return "Login";
 		}
-		
+
 		return "HostelersForm";
-		
+
 	}
-	
+
 	@PostMapping("/hostelersform")
 	public String saveHostelers(@ModelAttribute Hostelers hostel) {
 		hostelersRepo.save(hostel);
 		return "redirect:list";
 	}
-	
+
 	@GetMapping("/list")
-	public String getAllHos(Model model,HttpSession session)
-	{
-		
-    if(session.getAttribute("owner")==null) {
-			
+	public String getAllHos(Model model, HttpSession session) {
+
+		if (session.getAttribute("owner") == null) {
+
 			return "Login";
 		}
-		model.addAttribute("hosList",hostelersRepo.findAll());
+		model.addAttribute("hosList", hostelersRepo.findAll());
 		return "Home";
 	}
-	
+
 	@GetMapping("/delete")
-	public String deleteHostelers(@RequestParam int id,HttpSession session) {
-		
-		if(session.getAttribute("owner")==null) {
-			
+	public String deleteHostelers(@RequestParam int id, HttpSession session) {
+
+		if (session.getAttribute("owner") == null) {
+
 			return "Login";
 		}
-		
-		
+
 		hostelersRepo.deleteById(id);
 		return "redirect:list";
 	}
-	
+
 	@GetMapping("/edit")
-	public String editHostelers(@RequestParam int id,Model model,HttpSession session)
-	{
-		
-         if(session.getAttribute("owner")==null) {
-			
+	public String editHostelers(@RequestParam int id, Model model, HttpSession session) {
+
+		if (session.getAttribute("owner") == null) {
+
 			return "Login";
 		}
-		
-		model.addAttribute("hedit",hostelersRepo.findById(id));
+
+		model.addAttribute("hedit", hostelersRepo.findById(id));
 		return "EditForm";
 	}
-	
+
 	@PostMapping("/update")
-	public String updateHostelers(@ModelAttribute Hostelers hostel,HttpSession session) {
-		
-		if(session.getAttribute("owner")==null) {
-			
+	public String updateHostelers(@ModelAttribute Hostelers hostel, HttpSession session) {
+
+		if (session.getAttribute("owner") == null) {
+
 			return "Login";
 		}
-		//model.addAttribute("hosList",hostelersRepo.findAll());
-		//return "Home";
-		
+		// model.addAttribute("hosList",hostelersRepo.findAll());
+		// return "Home";
+
 		hostelersRepo.save(hostel);
 		return "redirect:list";
 	}
-	
+
 }

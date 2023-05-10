@@ -12,10 +12,10 @@ import jakarta.servlet.http.HttpSession;
 public class galeryController {
 
 	@GetMapping("/gallery")
-	public String galleryForm(Model model,HttpSession session) {
-	
-		if(session.getAttribute("owner")==null) {
-			
+	public String galleryForm(Model model, HttpSession session) {
+
+		if (session.getAttribute("owner") == null) {
+
 			return "Login";
 		}
 		File dir = new File("src/main/resources/static/images");
