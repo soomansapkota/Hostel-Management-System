@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>API</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+	<div th:insert="DashBoard.html"></div>
+
+	<button onclick="loadAPI()">Click Here</button>
+
+	<div class="container">
+		<table width="100%">
+
+			<thead>
+				<tr>
+					<td>PostID</td>
+					<td>ID</td>
+					<td>Name</td>
+					<td>Email</td>
+					<td>Comments</td>
+				</tr>
+
+			</thead>
+
+
+			<tbody id="tableData">
+
+			</tbody>
+
+
+
+		</table>
+
+		<script type="text/javascript">
+			function loadAPI() {
+
+				$(document).ready(function() {
+
+					$.ajax({
+
+						url : "https://jsonplaceholder.typicode.com/comments"
+
+					}).then(function(data) {
+
+						var row = '';
+
+						for (var i = 10; i < data.length; i++) {
+							row += '<tr>';
+							row += '<td>' + data[i].postId + '</td>';
+							row += '<td>' + data[i].id + '</td>';
+							row += '<td>' + data[i].name + '</td>';
+							row += '<td>' + data[i].email + '</td>';
+							row += '<td>' + data[i].body + '</td>';
+							row += '</tr>';
+						}
+
+						$("#tableData").append(row);
+
+					});
+
+				});
+			}
+		</script>
+
+	</div>
+
+</body>
+</html>

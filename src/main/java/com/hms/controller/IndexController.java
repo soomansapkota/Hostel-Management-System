@@ -12,5 +12,14 @@ public class IndexController {
 	public String homePage() {
 		return "Login";
 	}
+	
+	
+	@GetMapping("/rest")
+	public String REstAPI() {
+		
+		return "REstAPI";
+		
+	}
+	
 
 }
