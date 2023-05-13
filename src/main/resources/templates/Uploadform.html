@@ -7,22 +7,28 @@
 <body>
 
 	<div th:insert="DashBoard.html"></div>
-	<div class="container">
-		<div class="col d-flex justify-content-center ">
-			<form action="/upload" method="post" enctype="multipart/form-data">
-
-
-				Select Image :
-				<div>
-					<input type="file" id="file" name="file"><br>
-					<br> <input type="submit" value="Upload">
-				</div>
 
 
 
-			</form>
+	<div
+		class="container d-flex align-items-center justify-content-center vh-100">
+		<div class="card">
+			<div class="card-body">
+				<form action="/upload" method="post" enctype="multipart/form-data">
+
+
+					Select Image :
+					<div>
+						<input type="file" id="file" name="file"><br> <br>
+						<input type="submit" value="Upload">
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
+
+
+
 	<p>[[${message}]]</p>
 </body>
 </html>

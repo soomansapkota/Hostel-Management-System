@@ -46,7 +46,7 @@ public class hostelersController {
 			return "Login";
 		}
 		model.addAttribute("hosList", hostelersRepo.findAll());
-		return "Home";
+		return "List";
 	}
 
 	@GetMapping("/delete")

@@ -36,9 +36,10 @@ public class LoginController {
 
 			session.setAttribute("owner", own);
 			session.setMaxInactiveInterval(120);
-			// model.addAttribute("uname",owner.getUsername());
+			model.addAttribute("uname", owner.getUsername());
+			
 
-			return "DashBoard";
+			return "Home";
 		}
 
 		model.addAttribute("message", "User Not Found");
