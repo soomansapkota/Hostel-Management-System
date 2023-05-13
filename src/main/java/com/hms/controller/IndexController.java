@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class IndexController {
 
 	@GetMapping("/")
+	public String indexPage() {
+		return "index";
+	}
+	
+	@GetMapping("/index")
 	public String homePage() {
 		return "Login";
 	}
