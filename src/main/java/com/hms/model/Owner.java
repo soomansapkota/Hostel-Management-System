@@ -13,6 +13,15 @@ public class Owner {
 	private int ownerId;
 	private String fname;
 	private String lname;
+	private String email;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	private String username;
 	private String password;
 

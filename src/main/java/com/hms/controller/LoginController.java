@@ -30,12 +30,12 @@ public class LoginController {
 	public String doLogin(@ModelAttribute Owner owner, Model model, HttpSession session) {
 
 		owner.setPassword(DigestUtils.md5DigestAsHex(owner.getPassword().getBytes()));
-		Owner own = ownerRepo.findByUsernameAndPassword(owner.getUsername(), owner.getPassword());
+		Owner own = ownerRepo.findByEmailAndPassword(owner.getEmail(), owner.getPassword());
 
 		if (own != null) {
 
 			session.setAttribute("owner", own);
-			session.setMaxInactiveInterval(120);
+			session.setMaxInactiveInterval(120000);
 			model.addAttribute("uname", owner.getUsername());
 			
 

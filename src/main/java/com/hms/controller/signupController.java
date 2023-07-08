@@ -25,6 +25,6 @@ public class signupController {
 	public String saveOwner(@ModelAttribute Owner owner) {
 		owner.setPassword(DigestUtils.md5DigestAsHex(owner.getPassword().getBytes()));
 		ownerRepo.save(owner);
-		return "Login";
+		return "emailverify";
 	}
 }

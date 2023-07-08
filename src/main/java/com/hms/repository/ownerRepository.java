@@ -7,5 +7,5 @@ import com.hms.model.Owner;
 
 @Repository
 public interface ownerRepository extends JpaRepository<Owner, Integer> {
-	Owner findByUsernameAndPassword(String un, String psw);
+	Owner findByEmailAndPassword(String em, String psw);
 }
